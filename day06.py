@@ -18,6 +18,5 @@ for fu in [lambda s1,s2:s1.union(s2),lambda s1,s2:s1.intersection(s2)]:
 
 #one liner
 from functools import reduce 
-
 print([sum(map(len,[reduce(lambda x,y:fu(x,y),block) for block in map(lambda s:map(set,s.split('\n')),open("input06.txt",'r').read().split('\n\n'))])) for fu in [lambda s1,s2:s1.union(s2),lambda s1,s2:s1.intersection(s2)]])
 
