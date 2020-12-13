@@ -11,6 +11,3 @@ for diff,takt in buses:
         a+=b
     b*=takt
 print(a)
-
-#oneliner
-print((lambda a:lambda v:a(a,v))(lambda s,x:x if len(x[2])==0 else s(s,(x[0]+x[1],x[1],x[2])) if (x[0]+x[2][0][0])%x[2][0][1]!=0 else s(s,(x[0],x[1]*x[2][0][1],x[2][1:])))((0,1,[(x[0],int(x[1])) for x in enumerate(open("input13.txt",'r').readlines()[1].split(',')) if x[1]!='x']))[0])
