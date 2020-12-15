@@ -9,5 +9,3 @@ for max_turn in [2020,30000000]:
         last_num=new_num
         turns+=1
     print(new_num)
-
-
