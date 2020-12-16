@@ -26,30 +26,18 @@ for n in ntickets:
 print(su)
 
 tnt=list(map(list, zip(*valid_tickets)))  #transpose
-#print('tnt',valid_tickets, tnt)
-ticks=[0]
-matches=[[all(map(lambda v:between_or(v,r),t))for r in rules] for t in tnt]
-print(matches)
-def search(ru,po,mat,rl):
-    for rul in range(ru,rl):
-        for pos in po:
-            if matches[pos][rul]:
-                se=search(rul+1,po-set({pos}),mat+[(rul,pos)],rl)
-                if len(se)==rl:
-                    return se
-        ticks[0]+=1
-        if ticks[0]%100000==0:
-            print(ticks[0],mat)
-        #print(rul,len(po),mat)
-    return mat
- 
-mapping=search(0,set(range(len(rules))),[],len(rules))
-print(mapping)
+
+matches=[(pr,[p for p,t in enumerate(tnt) if all(map(lambda v:between_or(v,r),t))]) for pr,r in enumerate(rules)]
+matches.sort(key=lambda x:len(x[1]))
+
+for i in range(1,len(rules)-1):
+    for j in range(i,len(rules)):
+        matches[j][1].remove(matches[i-1][1][0])
 
 mu=1
-for i in mapping[:6]:
-    print(i)
-    mu*=yticket[i[1]]
+for i in range(len(rules)):
+    if matches[i][0]<6:
+        mu*=yticket[matches[i][1][0]]
 print(mu)
 
     
