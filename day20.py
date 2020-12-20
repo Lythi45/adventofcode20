@@ -1,5 +1,5 @@
 from itertools import combinations,product
-lines=open("input20.txt",'r').readlines()
+lines=open("input20b.txt",'r').readlines()
 dirs=[(1,0),(0,1),(-1,0),(0,-1)]
 st=[(0,0),(9,0),(9,9),(0,9)]
 print(st)
@@ -25,29 +25,36 @@ print(n_tiles)
 def match(k1,k2,fl):
     return k1==k2 if fl else k1==k2[::-1]
 x=0
+tile_kn=[i:{} for i in range(n_tiles)]
+
 for c in combinations(range(n_tiles),2):
     for k in range(4):
         for ro in range(4):
             for fl in [False,True]:
                 if match(tiles[c[0]][k],tiles[c[1]][(k+2+ro)%4],fl):
                     print(c,k,ro,fl)
-                    tile_kn[c[0]]=tile_kn.get(c[0],[])+[(c[1],k,ro,fl)]
-                    tile_kn[c[1]]=tile_kn.get(c[1],[])+[(c[0],ro,k,fl)]
+                    tile_kn[c[0]]=tile_kn.get(c[0],{})
+                    tile_kn[c[0]][k]=(c[0],ro,fl)
+                    tile_kn[c[1]]=tile_kn.get(c[1],{})
+                    tile_kn[c[1]][ro]=(c[0],k,fl)
                 
 print(x,tile_kn)
 mu=1
 for n in [tile_n[tn] for tn in tile_kn if len(tile_kn[tn])==2]:
     mu*=n
-print(mu)
+print(mu,n)
 
-seamo='''
+seamo_s='''
                   # 
 #    ##    ##    ###
  #  #  #  #  #  #   
  '''.split('\n')[1:4]
+
+seamo={(x,y) for y,line in enumerate(seamo_s) for x,c in enumerate(line) if c=='#'}
  
-start_tile=[tn for tn in tile_kn if len(tile_kn[tn])==2 and all(k[1] in {2,3} for k in tile_kn[tn])][0]
+start_tile=n
 print(start_tile)
-
-
 print(seamo)
+
+for i in range(1:size):
+
