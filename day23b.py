@@ -17,13 +17,13 @@ for r in range(10000000):
         three_cups[i]=next
     cupl[current]=cupl[next]
 
-    cn=(current-1)%lc
-    while cn in three_cups:
-        cn=(cn-1)%lc
+    dest=(current-1)%lc
+    while dest in three_cups:
+        dest=(dest-1)%lc
 
-    cupl[cn],cupl[three_cups[2]]=three_cups[0],cupl[cn]
+    cupl[dest],cupl[three_cups[2]]=three_cups[0],cupl[dest]
     current=cupl[current]
   
 n=cupl[0]
 n2=cupl[n]
-print(n+1,n2+1,(n+1)*(n2+1))
+print((n+1)*(n2+1))
