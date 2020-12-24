@@ -11,17 +11,16 @@ cupl[lc-1]=current
 
 three_cups=[0,0,0]
 for r in range(10000000):
-    next=current
-    for i in range(3):
-        next=cupl[next]
-        three_cups[i]=next
-    cupl[current]=cupl[next]
+    cup1=cupl[current]
+    cup2=cupl[cup1]
+    cup3=cupl[cup2]
+    cupl[current]=cupl[cup3]
 
     dest=(current-1)%lc
-    while dest in three_cups:
+    while dest in {cup1,cup2,cup3}:
         dest=(dest-1)%lc
 
-    cupl[dest],cupl[three_cups[2]]=three_cups[0],cupl[dest]
+    cupl[dest],cupl[cup3]=cup1,cupl[dest]
     current=cupl[current]
   
 n=cupl[0]
